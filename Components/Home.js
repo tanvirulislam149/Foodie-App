@@ -1,9 +1,8 @@
-import { View, Text, Image, StyleSheet, ImageBackground, ScrollView, Alert, ActivityIndicator, useWindowDimensions } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import { StyleSheet, ImageBackground, ScrollView, View } from 'react-native'
 import Banner from './Banner';
 import Menu from './Menu';
 import ReserveTable from './ReserveTable';
+import Review from './Review';
 const bg = require("../assets/bg.jpg");
 
 const Home = () => {
@@ -14,6 +13,7 @@ const Home = () => {
           <Banner />
           <Menu />
           <ReserveTable />
+          <Review />
         </ScrollView>
       </View>
     </ImageBackground>
@@ -23,7 +23,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0, 0.5)',
+    backgroundColor: 'rgba(0,0,0, 0.6)',
   },
   bgImage: {
     height: "100%",
