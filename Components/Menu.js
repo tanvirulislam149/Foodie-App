@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet, ActivityIndicator, Image, useWindowDimensions, Alert } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, Image, useWindowDimensions, Alert, Pressable } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 const Menu = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
 
   const windowWidth = useWindowDimensions().width;
 
@@ -34,13 +36,15 @@ const Menu = () => {
               <View style={styles.mealItems}>
                 {
                   data.map(d =>
-                    <View key={d.idMeal}>
-                      <Image style={[styles.mealImg, { width: windowWidth / 2.2 }]} source={{ uri: d.strMealThumb }} />
-                      <View style={styles.titleCont}>
-                        <Text style={styles.title}>{d.strMeal}</Text>
-                        <Text style={styles.title}>${Number(String(d.idMeal).slice(-1)) + 5}.00</Text>
+                    <Pressable onPress={() => navigation.navigate("mealDetails", { id: d.idMeal })} key={d.idMeal}>
+                      <View>
+                        <Image style={[styles.mealImg, { width: windowWidth / 2.2 }]} source={{ uri: d.strMealThumb }} />
+                        <View style={styles.titleCont}>
+                          <Text style={styles.title}>{d.strMeal}</Text>
+                          <Text style={styles.title}>${Number(String(d.idMeal).slice(-1)) + 5}.00</Text>
+                        </View>
                       </View>
-                    </View>
+                    </Pressable>
                   )
                 }
               </View>
