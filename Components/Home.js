@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
     fontWeight: "900"
   },
   mealImg: {
-    height: 150
+    height: 150,
+    borderRadius: 10
   },
   mealItems: {
     flexDirection: "row",
