@@ -38,7 +38,7 @@ const Menu = () => {
                       <Image style={[styles.mealImg, { width: windowWidth / 2.2 }]} source={{ uri: d.strMealThumb }} />
                       <View style={styles.titleCont}>
                         <Text style={styles.title}>{d.strMeal}</Text>
-                        <Text style={styles.title}>${Math.floor((Math.random() * 10) + 5)}.00</Text>
+                        <Text style={styles.title}>${Number(String(d.idMeal).slice(-1)) + 5}.00</Text>
                       </View>
                     </View>
                   )
