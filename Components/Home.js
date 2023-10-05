@@ -59,6 +59,10 @@ const Home = () => {
 
             </View>
           </View>
+          <View style={styles.reserveCont}>
+            <Image style={styles.reserveImg} source={{ uri: "https://i.ibb.co/nDCBnhQ/reserve.png" }} />
+            <Text style={styles.reserveTable}>Reserve Table</Text>
+          </View>
         </ScrollView>
       </View>
     </ImageBackground>
@@ -122,6 +126,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 30,
     justifyContent: 'space-between'
+  },
+  reserveCont: {
+    backgroundColor: "lightgray",
+    padding: 20,
+    margin: 30,
+    alignItems: "center",
+  },
+  reserveTable: {
+    color: "black",
+    fontWeight: "700",
+    fontSize: 20,
+  },
+  reserveImg: {
+    width: 50,
+    height: 50
   }
 })
 
