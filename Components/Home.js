@@ -3,6 +3,7 @@ import Banner from './Banner';
 import Menu from './Menu';
 import ReserveTable from './ReserveTable';
 import Review from './Review';
+import Footer from './Footer';
 const bg = require("../assets/bg.jpg");
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
           <Menu />
           <ReserveTable />
           <Review />
+          <Footer />
         </ScrollView>
       </View>
     </ImageBackground>
