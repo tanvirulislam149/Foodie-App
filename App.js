@@ -14,7 +14,7 @@ export default function App() {
           headerTransparent: true,
         }} />
         <Stack.Screen name="mealDetails" component={MealDetails} options={{
-          title: "details"
+          title: "Details"
         }} />
       </Stack.Navigator>
       <StatusBar />
