@@ -1,9 +1,12 @@
 import { View, Text, TextInput, StyleSheet, ImageBackground, Button, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(true);
+  const navigation = useNavigation();
+
   return (
     <ImageBackground style={{ width: "100%", height: "100%" }} source={{ uri: "https://png.pngtree.com/background/20211215/original/pngtree-modern-simple-elegant-gradient-red-landing-page-website-background-picture-image_1455085.jpg" }}>
       <View style={styles.container}>
@@ -22,10 +25,14 @@ const LoginPage = () => {
               onPress={() => setShowPassword(!showPassword)}
             />
           </View>
-          <Pressable style={{ flexDirection: "row", justifyContent: "space-between" }}>
-            <Text style={styles.goToRegister}>Click here to register.</Text>
-            <Text style={styles.goToRegister}>Forgot Password?</Text>
-          </Pressable>
+          <View style={styles.goToRegisterCont}>
+            <Pressable onPress={() => navigation.navigate("register")}>
+              <Text style={styles.goToRegister}>Click here to register.</Text>
+            </Pressable>
+            <Pressable>
+              <Text style={styles.goToRegister}>Forgot Password?</Text>
+            </Pressable>
+          </View>
           <Pressable>
             <Text style={styles.button}>Login</Text>
           </Pressable>
@@ -83,6 +90,10 @@ const styles = StyleSheet.create({
     color: "white",
     paddingBottom: 1,
     textDecorationLine: 'underline'
+  },
+  goToRegisterCont: {
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 })
 
