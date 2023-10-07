@@ -1,12 +1,35 @@
-import { View, Text, TextInput, StyleSheet, ImageBackground } from 'react-native'
-import React from 'react'
+import { View, Text, TextInput, StyleSheet, ImageBackground, Button, Pressable } from 'react-native'
+import React, { useState } from 'react'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState(true);
   return (
     <ImageBackground style={{ width: "100%", height: "100%" }} source={{ uri: "https://png.pngtree.com/background/20211215/original/pngtree-modern-simple-elegant-gradient-red-landing-page-website-background-picture-image_1455085.jpg" }}>
       <View style={styles.container}>
         <Text style={styles.title}>Login</Text>
-        <TextInput style={styles.emailInput} />
+        <View style={styles.inputCont}>
+          <Text style={styles.label}>Email: </Text>
+          <TextInput style={styles.emailInput} autoCapitalize='none' autoCorrect={false} autoComplete="off" />
+          <Text style={styles.label}>Password: </Text>
+          <View>
+            <TextInput style={styles.emailInput} autoCapitalize='none' autoCorrect={false} autoComplete="off" secureTextEntry={showPassword} />
+            <MaterialCommunityIcons
+              name={showPassword ? "eye-off" : 'eye'}
+              size={24}
+              color="#aaa"
+              style={styles.icon}
+              onPress={() => setShowPassword(!showPassword)}
+            />
+          </View>
+          <Pressable style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Text style={styles.goToRegister}>Click here to register.</Text>
+            <Text style={styles.goToRegister}>Forgot Password?</Text>
+          </Pressable>
+          <Pressable>
+            <Text style={styles.button}>Login</Text>
+          </Pressable>
+        </View>
       </View>
     </ImageBackground>
   )
@@ -14,8 +37,6 @@ const LoginPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // marginVertical: 10,
-    // marginHorizontal: 5,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -27,13 +48,41 @@ const styles = StyleSheet.create({
     color: "white",
     marginBottom: 20
   },
+  inputCont: {
+    width: "80%"
+  },
+  label: {
+    color: "white",
+  },
   emailInput: {
     borderWidth: 2,
     borderColor: "white",
-    width: "80%",
     padding: 5,
     borderRadius: 5,
-    marginVertical: 5
+    marginBottom: 20,
+    color: "white",
+    fontSize: 18
+  },
+  button: {
+    backgroundColor: "tomato",
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    fontSize: 18,
+    color: "white",
+    textAlign: "center",
+    borderRadius: 5,
+    alignSelf: "center",
+    marginTop: 10
+  },
+  icon: {
+    position: "absolute",
+    top: 8,
+    right: 10
+  },
+  goToRegister: {
+    color: "white",
+    paddingBottom: 1,
+    textDecorationLine: 'underline'
   }
 })
 
