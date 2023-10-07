@@ -30,7 +30,9 @@ const HomeContainer = () => {
       <Tab.Screen name="Home" component={Home} options={{
         headerShown: false
       }} />
-      <Tab.Screen name="User" component={UserTab} />
+      <Tab.Screen name="User" component={UserTab} options={{
+        headerShown: false
+      }} />
     </Tab.Navigator>
   )
 }
