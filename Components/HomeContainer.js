@@ -5,6 +5,7 @@ import Home from './Home';
 import UserTab from './UserTab';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import HomeDrawer from './HomeDrawer';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +15,7 @@ const HomeContainer = () => {
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
 
-        if (route.name === 'Home') {
+        if (route.name === 'HomeDrawer') {
           iconName = focused
             ? 'home'
             : 'home-outline';
@@ -27,7 +28,7 @@ const HomeContainer = () => {
       tabBarActiveTintColor: 'tomato',
       tabBarInactiveTintColor: 'gray',
     })}>
-      <Tab.Screen name="Home" component={Home} options={{
+      <Tab.Screen name="HomeDrawer" component={HomeDrawer} options={{
         headerShown: false
       }} />
       <Tab.Screen name="User" component={UserTab} options={{
