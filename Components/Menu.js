@@ -20,7 +20,7 @@ const Menu = () => {
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        Alert.alert(error);
+        Alert.alert(error.message, "Please check your internet to see item list");
       })
   }, [])
 
@@ -32,7 +32,7 @@ const Menu = () => {
         {
           loading ?
             <ActivityIndicator style={{ marginTop: 50 }} color={"white"} size={40} /> :
-            data.length ?
+            data.length !== 0 ?
               <View style={styles.mealItems}>
                 {
                   data.map(d =>
@@ -48,7 +48,7 @@ const Menu = () => {
                   )
                 }
               </View>
-              : <Text>No Record Found</Text>
+              : <Text style={styles.noRecord}>No Records Found</Text>
         }
       </View>
     </View>
@@ -86,6 +86,12 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     justifyContent: 'space-between'
   },
+  noRecord: {
+    textAlign: "center",
+    fontSize: 24,
+    color: "white",
+    marginVertical: 20
+  }
 })
 
 export default Menu

@@ -62,9 +62,10 @@ const styles = StyleSheet.create({
   call: {
     paddingHorizontal: 25,
     paddingVertical: 10,
-    color: "white",
-    backgroundColor: "black",
+    color: "black",
+    backgroundColor: "white",
     fontSize: 20,
+    fontWeight: "700",
     textAlign: 'center',
     alignSelf: "center",
     marginBottom: 20
