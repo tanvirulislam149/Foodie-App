@@ -30,6 +30,8 @@ const HomeDrawer = () => {
       }} />
       <Drawer.Screen name="contact" component={Contact} options={{
         title: "Contact",
+        headerTransparent: true,
+        headerTitle: "",
         drawerIcon: () => <Entypo style={{ marginLeft: 40 }} name="phone" size={25} />
       }} />
     </Drawer.Navigator>
