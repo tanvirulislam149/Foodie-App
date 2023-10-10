@@ -28,6 +28,7 @@ const RegisterPage = () => {
           setEmail("");
           setPassword("");
           setConfirmPass("");
+          navigation.navigate("Home")
         })
         .catch((error) => {
           const errorCode = error.code;
