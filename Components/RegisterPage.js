@@ -2,11 +2,44 @@ import { View, Text, TextInput, StyleSheet, ImageBackground, Button, Pressable }
 import React, { useState } from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { Alert } from 'react-native';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase.config';
+import { ActivityIndicator } from 'react-native';
+
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(true);
   const [showConfirmPass, setShowConfirmPass] = useState(true);
   const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleRegister = () => {
+    if (confirmPass === password) {
+      setLoading(true);
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user.email;
+          setLoading(false);
+          Alert.alert(`Welcome ${user}`);
+          setEmail("");
+          setPassword("");
+          setConfirmPass("");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setLoading(false);
+          Alert.alert(error.message);
+        })
+    } else {
+      Alert.alert("Password didn't match.")
+    }
+  }
+
 
   return (
     <ImageBackground style={{ width: "100%", height: "100%" }} source={{ uri: "https://png.pngtree.com/background/20211215/original/pngtree-modern-simple-elegant-gradient-red-landing-page-website-background-picture-image_1455085.jpg" }}>
@@ -14,10 +47,10 @@ const RegisterPage = () => {
         <Text style={styles.title}>Register</Text>
         <View style={styles.inputCont}>
           <Text style={styles.label}>Email: </Text>
-          <TextInput style={styles.emailInput} autoCapitalize='none' autoCorrect={false} autoComplete="off" />
+          <TextInput onChangeText={setEmail} value={email} style={styles.emailInput} autoCapitalize='none' autoCorrect={false} autoComplete="off" />
           <Text style={styles.label}>Password: </Text>
           <View>
-            <TextInput style={styles.emailInput} autoCapitalize='none' autoCorrect={false} autoComplete="off" secureTextEntry={showPassword} />
+            <TextInput onChangeText={setPassword} value={password} style={styles.emailInput} autoCapitalize='none' autoCorrect={false} autoComplete="off" secureTextEntry={showPassword} />
             <MaterialCommunityIcons
               name={showPassword ? "eye-off" : 'eye'}
               size={24}
@@ -28,7 +61,7 @@ const RegisterPage = () => {
           </View>
           <Text style={styles.label}>Confirm Password: </Text>
           <View>
-            <TextInput style={styles.emailInput} autoCapitalize='none' autoCorrect={false} autoComplete="off" secureTextEntry={showConfirmPass} />
+            <TextInput onChangeText={setConfirmPass} value={confirmPass} style={styles.emailInput} autoCapitalize='none' autoCorrect={false} autoComplete="off" secureTextEntry={showConfirmPass} />
             <MaterialCommunityIcons
               name={showConfirmPass ? "eye-off" : 'eye'}
               size={24}
@@ -42,8 +75,10 @@ const RegisterPage = () => {
               <Text style={styles.goToRegister}>Go to login page.</Text>
             </Pressable>
           </View>
-          <Pressable>
-            <Text style={styles.button}>Register</Text>
+          <Pressable style={{ alignSelf: "center" }} onPress={() => handleRegister()}>
+            {
+              loading ? <ActivityIndicator style={styles.button} color="white" size={30} /> : <Text style={styles.button}>Register</Text>
+            }
           </Pressable>
         </View>
       </View>
@@ -103,7 +138,7 @@ const styles = StyleSheet.create({
   goToRegisterCont: {
     flexDirection: "row",
     justifyContent: "space-between"
-  }
+  },
 })
 
 export default RegisterPage
