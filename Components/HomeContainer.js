@@ -27,9 +27,13 @@ const HomeContainer = () => {
       },
       tabBarActiveTintColor: 'tomato',
       tabBarInactiveTintColor: 'gray',
+      tabBarLabelStyle: {
+        fontSize: 15
+      }
     })}>
       <Tab.Screen name="HomeDrawer" component={HomeDrawer} options={{
-        headerShown: false
+        headerShown: false,
+        tabBarLabel: "Home",
       }} />
       <Tab.Screen name="User" component={UserTab} options={{
         headerShown: false

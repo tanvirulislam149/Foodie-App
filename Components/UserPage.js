@@ -7,6 +7,8 @@ import { auth } from '../firebase.config';
 import { Button } from 'react-native';
 import { ActivityIndicator } from 'react-native';
 import { Alert } from 'react-native';
+import { StyleSheet } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const UserPage = () => {
   const navigation = useNavigation();
@@ -40,11 +42,24 @@ const UserPage = () => {
 
 
   return (
-    <View>
-      <Text>{user?.email}</Text>
-      <Button onPress={() => handleSignOut()} title="sign-out" />
+    <View style={styles.container}>
+      <FontAwesome name="user-circle-o" size={50} />
+      <Text style={styles.email}>Email: {user?.email}</Text>
+      <Button color={"black"} onPress={() => handleSignOut()} title="sign-out" />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  email: {
+    fontSize: 24,
+    marginVertical: 10
+  }
+})
 
 export default UserPage
