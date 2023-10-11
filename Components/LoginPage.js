@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase.config';
 import { Alert } from 'react-native';
 import { ActivityIndicator } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(true);
@@ -17,13 +18,15 @@ const LoginPage = () => {
   const handleLogin = () => {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
-      .then((user) => {
+      .then(async (user) => {
         console.log(user);
         setLoading(false);
         setEmail("");
         setPassword("");
+        const obj = JSON.stringify(user.user);
+        await AsyncStorage.setItem('user', obj);
         Alert.alert(`Welcome back ${user.user.email}`)
-        navigation.navigate("Home");
+        navigation.navigate("userPage");
       })
       .catch((error) => {
         console.log(error.message);
@@ -38,10 +41,10 @@ const LoginPage = () => {
         <Text style={styles.title}>Login</Text>
         <View style={styles.inputCont}>
           <Text style={styles.label}>Email: </Text>
-          <TextInput style={styles.emailInput} onChangeText={setEmail} autoCapitalize='none' autoCorrect={false} autoComplete="off" />
+          <TextInput style={styles.emailInput} value={email} onChangeText={setEmail} autoCapitalize='none' autoCorrect={false} autoComplete="off" />
           <Text style={styles.label}>Password: </Text>
           <View>
-            <TextInput style={styles.emailInput} onChangeText={setPassword} autoCapitalize='none' autoCorrect={false} autoComplete="off" secureTextEntry={showPassword} />
+            <TextInput style={styles.emailInput} onChangeText={setPassword} value={password} autoCapitalize='none' autoCorrect={false} autoComplete="off" secureTextEntry={showPassword} />
             <MaterialCommunityIcons
               name={showPassword ? "eye-off" : 'eye'}
               size={24}

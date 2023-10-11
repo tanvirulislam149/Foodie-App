@@ -6,6 +6,7 @@ import { Alert } from 'react-native';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase.config';
 import { ActivityIndicator } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const RegisterPage = () => {
@@ -21,14 +22,16 @@ const RegisterPage = () => {
     if (confirmPass === password) {
       setLoading(true);
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
           const user = userCredential.user.email;
+          const obj = JSON.stringify(userCredential.user);
+          await AsyncStorage.setItem('user', obj);
           setLoading(false);
           Alert.alert(`Welcome ${user}`);
           setEmail("");
           setPassword("");
           setConfirmPass("");
-          navigation.navigate("Home")
+          navigation.navigate("userPage")
         })
         .catch((error) => {
           const errorCode = error.code;
