@@ -21,7 +21,13 @@ const UserTab = () => {
         await AsyncStorage.setItem('user', obj);
         navigation.navigate("userPage");
       } else {
-        navigation.navigate("login");
+        const value = await AsyncStorage.getItem('user');
+        const data = JSON.parse(value);
+        if (!data) {
+          navigation.navigate("login");
+        } else {
+          navigation.navigate("userPage");
+        }
       }
     })
   }, [])
