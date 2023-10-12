@@ -6,10 +6,18 @@ import UserTab from './UserTab';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import HomeDrawer from './HomeDrawer';
+import { useFonts } from 'expo-font';
 
 const Tab = createBottomTabNavigator();
 
 const HomeContainer = () => {
+  const [fontsLoaded] = useFonts({
+    "Montserrat-bold": require("../assets/fonts/Montserrat-Bold.ttf")
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <Tab.Navigator screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
@@ -28,7 +36,8 @@ const HomeContainer = () => {
       tabBarActiveTintColor: 'tomato',
       tabBarInactiveTintColor: 'gray',
       tabBarLabelStyle: {
-        fontSize: 15
+        fontSize: 15,
+        fontFamily: 'Montserrat-bold'
       }
     })}>
       <Tab.Screen name="HomeDrawer" component={HomeDrawer} options={{

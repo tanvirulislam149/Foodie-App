@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, ActivityIndicator, Image, useWindowDimensions, 
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
 
 const Menu = () => {
   const [data, setData] = useState([]);
@@ -23,6 +24,14 @@ const Menu = () => {
         Alert.alert(error.message, "Please check your internet to see item list");
       })
   }, [])
+
+  const [fontsLoaded] = useFonts({
+    "Montserrat-bold": require("../assets/fonts/Montserrat-Bold.ttf")
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
 
   return (
@@ -60,8 +69,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "white",
     textAlign: "center",
-    fontWeight: "700",
-    marginTop: 50
+    marginTop: 50,
+    fontFamily: 'Montserrat-bold'
   },
   titleCont: {
     flexDirection: "row",
@@ -71,8 +80,8 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "white",
-    fontSize: 20,
-    fontWeight: "900"
+    fontSize: 18,
+    fontFamily: "Montserrat-bold"
   },
   mealImg: {
     height: 150,

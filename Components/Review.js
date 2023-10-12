@@ -1,7 +1,15 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
+import { useFonts } from 'expo-font';
 
 const Review = () => {
+  const [fontsLoaded] = useFonts({
+    "Montserrat-bold": require("../assets/fonts/Montserrat-Bold.ttf")
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Have you tried our new burger?</Text>
@@ -16,7 +24,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "white",
-    fontWeight: "700",
+    fontFamily: "Montserrat-bold",
     fontSize: 22,
     textAlign: "center",
     marginBottom: 10,
